@@ -3,27 +3,22 @@
  * @Author: chengjun_xu
  * @Data: Do not edit
  * @LastAuthor: Do not edit
- * @LastEditTime: 2022-01-05 10:58:46
+ * @LastEditTime: 2022-01-07 15:43:48
  */
 
 #pragma once
-#include <vector>
+#include <list>
 #include "observer.h"
 
 class Subject{
 public:
-    Subject();
-    ~Subject();
+    virtual void attach(Observer *) = 0;
 
-    void attach(Observer &observer);
+    virtual void detach(Observer *) = 0;
 
-    void detach(Observer &observer);
-
-    void notify();
+    virtual void notify() = 0;
 
 protected:
 
 private:
-    std::vector<Observer> observers; // 观察者容器
-
 };

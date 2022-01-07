@@ -3,7 +3,7 @@
  * @Author: chengjun_xu
  * @Data: Do not edit
  * @LastAuthor: Do not edit
- * @LastEditTime: 2022-01-05 10:39:40
+ * @LastEditTime: 2022-01-07 15:57:13
  */
 
 
@@ -38,8 +38,42 @@
  * 4、主题类某个业务逻辑发生时通知观察者对象，每个观察者执行自己的业务逻辑。
 */
 
+#include <iostream>
+#include <vector>
+#include "concreteSubject.h"
+#include "concreteObserver.h"
+
 int main(){
-    
+    // Creat Subject
+    ConcreteSubject *subject = new ConcreteSubject();
+
+    // Create Observer
+    std::vector<Observer*> observers;
+    for(int i=0; i<10; i++){
+        Observer *observer = new ConcreteObserver(subject, i);
+        observers.push_back(observer);
+    }
+
+    // Change the state
+    subject->setState(-1);
+
+    // Register the observer
+    for(int i=0; i<observers.size(); ++i)
+        subject->attach(observers[i]);
+
+    subject->notify();
+
+    // UnRegister the observer
+    for(int i=0; i < observers.size(); ++i){
+        subject->detach(observers[i]);
+        subject->setState(i++);
+        subject->notify();
+    }
+
+    for(auto it : observers)
+        delete it;
+        
+    delete subject;
 
     return 0;
 }

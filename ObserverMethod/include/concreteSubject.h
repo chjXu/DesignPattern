@@ -3,7 +3,7 @@
  * @Author: chengjun_xu
  * @Data: Do not edit
  * @LastAuthor: Do not edit
- * @LastEditTime: 2022-01-05 11:10:23
+ * @LastEditTime: 2022-01-07 15:27:21
  */
 
 #pragma once
@@ -15,12 +15,17 @@ public:
     ConcreteSubject();
     ~ConcreteSubject();
 
-    std::string get() const;
+    void attach(Observer *pObserver);
 
-    void set(std::string &value);
+    void detach(Observer *pObserver);
+
+    void notify();
+
+    void setState(int state);
     
 protected:
 
 private:
-    std::string subjectState;
+    std::list<Observer *> m_ObserverList;
+    int m_State;
 };

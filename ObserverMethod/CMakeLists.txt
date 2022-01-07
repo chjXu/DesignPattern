@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-project(strategy)
+project(observer)
 
 set( CMAKE_BUILD_TYPE "Debug" )
 
@@ -9,10 +9,8 @@ include_directories(
 )
 
 add_library(${PROJECT_NAME}
-    src/strategyClass.cpp
-    src/concreteStrategyA.cpp
-    src/concreteStrategyB.cpp
-    src/context.cpp
+    src/concreteObserver.cpp
+    src/concreteSubject.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

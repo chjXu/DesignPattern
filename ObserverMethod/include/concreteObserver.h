@@ -3,26 +3,25 @@
  * @Author: chengjun_xu
  * @Data: Do not edit
  * @LastAuthor: Do not edit
- * @LastEditTime: 2022-01-05 11:14:21
+ * @LastEditTime: 2022-01-07 15:53:40
  */
 
 
 #pragma once
 #include <string>
+#include <iostream>
 #include "observer.h"
-#include "concreteSubject.h"
+#include "subject.h"
 
 class ConcreteObserver : public Observer{
 public:
-    ConcreteObserver(ConcreteSubject &subject, std::string name);
-    ~ConcreteObserver();
+    ConcreteObserver(Subject *pSubject, int i);
 
-    virtual void update() override;
+    void update(int value);
 
 protected:
 
 private:
-    std::string name;
-    std::string observerState;
-    ConcreteSubject subject;
+    Subject *m_pSubject;
+    int id;
 };

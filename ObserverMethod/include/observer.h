@@ -3,7 +3,7 @@
  * @Author: chengjun_xu
  * @Data: Do not edit
  * @LastAuthor: Do not edit
- * @LastEditTime: 2022-01-05 10:59:10
+ * @LastEditTime: 2022-01-07 15:43:38
  */
 
 /**
@@ -14,10 +14,7 @@
 
 class Observer{
 public:
-    Observer();
-    ~Observer();
-
-    virtual void update() = 0;
+    virtual void update(int) = 0;
 protected:
 
 private:
