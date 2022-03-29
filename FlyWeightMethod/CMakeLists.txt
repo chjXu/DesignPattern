@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-project(template)
+project(flyweight)
 
 set( CMAKE_BUILD_TYPE "Debug" )
 
@@ -9,9 +9,8 @@ include_directories(
 )
 
 add_library(${PROJECT_NAME}
-    src/abstractClass.cpp
-    src/concreteClassA.cpp
-    src/concreteClassB.cpp
+    src/font.cpp
+    src/fontfactory.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
