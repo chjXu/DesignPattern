@@ -279,7 +279,7 @@
 
 > 如何使请求的发送者不需要指定具体的接收者？让请求的接收者自己在运行时决定来处理请求，从而使二者解耦；
 
-![结构图](https://github.com/chjXu/DesignPattern/tree/main/figures/ResponsibilityChain.png)
+![结构图](https://github.com/chjXu/DesignPattern/tree/main/figures/ResponsibilityChain.png=200x)
 
 总结：
 >
