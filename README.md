@@ -279,7 +279,7 @@
 
 > 如何使请求的发送者不需要指定具体的接收者？让请求的接收者自己在运行时决定来处理请求，从而使二者解耦；
 
-![结构图] (https://github.com/chjXu/DesignPattern/tree/main/figures/ResponsibilityChain.png=200x)
+![结构图](https://github.com/chjXu/DesignPattern/tree/main/figures/ResponsibilityChain.png=200x)
 
 总结：
 > 职责链模式的应用场合在于“一个请求可能有多个接收者，但最后真正的接收者只有一个”，这个时候请求发送者与接收者的耦合有可能出现“变化脆弱”的症状，职责链的目的就是将二者解耦，从而更好地应对变化；
