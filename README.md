@@ -49,7 +49,7 @@
 
 6. 状态变化：备忘录模式，状态模式
 
-7. 数据结构：组合模式，迭代器模式，职责链模式，职责模式
+7. 数据结构：组合模式，迭代器模式，[职责链模式](https://github.com/chjXu/DesignPattern/tree/main/ResponsibilityChain)，职责模式
 
 8. 行为变化：命令模式，访问者模式
 
