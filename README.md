@@ -37,7 +37,7 @@
 
 ## 模式分类：
 
-1. 组件协作：模板模式(https://github.com/chjXu/DesignPattern/tree/main/TemplateMethod)，策略模式，观察者/事件模式
+1. 组件协作：[模板模式](https://github.com/chjXu/DesignPattern/tree/main/TemplateMethod)，策略模式，观察者/事件模式
 
 2. 单一职责：装饰者模式，桥模式
 
