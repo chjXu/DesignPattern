@@ -2,15 +2,17 @@
 
 int main(int argc, char** argv)
 {
-    IntHandler *int_handler = new IntHandler;
-    StringHandler *string_handler = new StringHandler;
-    DoubbleHandler *double_handler = new DoubleHandler;
+    Request req = Request::Request3;
+    RequestHandler1 *r1_handler = new RequestHandler1;
+    RequestHandler2 *r2_handler = new RequestHandler2;
+    RequestHandler3 *r3_handler = new RequestHandler3;
     
-    int_handler->setNext(string_handler)->setNext(double_handler);
-    int_handler->Handler(0, "A", 1.0);
+    r1_handler->setNext(r2_handler);
+    r2_handler->setNext(r3_handler);
+    r1_handler->Handle(req);
     
-    delete int_handler;
-    delete string_handler;
-    delete double_handler;
+    delete r1_handler;
+    delete r2_handler;
+    delete r3_handler;
     return 0;
 }
