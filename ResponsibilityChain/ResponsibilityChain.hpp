@@ -14,12 +14,21 @@ enum Request
     Request3
 };
 
+class RequestClient
+{
+public:
+    RequestClient(const Request& req) : req(req) {}
+    Request getReq() const { return this->req; }
+private:
+    Request req;
+};
+
 // 定义基类
 class Handler
 {
 public:
     virtual Handler* setNext(Handler *handler) = 0;
-    virtual bool Handle(const Request& req) = 0;
+    virtual bool Handle(const RequestClient& req) = 0;
 };
 
 
@@ -34,7 +43,7 @@ public:
         return this;
     }
 
-    bool Handle(const Request& req) override
+    bool Handle(const RequestClient& req) override
     {
         if(this->next_handler_ != nullptr)
         {
@@ -47,13 +56,13 @@ private:
     Handler* next_handler_; // 核心指针
 };
 
-// 定义处理int类
+// RequestHandler1
 class RequestHandler1 : public AbstractHandler
 {
 public:
-    bool Handle(const Request& req) override
+    bool Handle(const RequestClient& req) override
     {
-        if(req == Request::Request1)
+        if(req.getReq() == Request::Request1)
         {
             std::cout << "RequestHandler1 处理 OK" << std::endl;
             return true;
@@ -66,13 +75,13 @@ public:
     }
 };
 
-// 定义string类
+// RequestHandler2
 class RequestHandler2 : public AbstractHandler
 {
 public:
-    bool Handle(const Request& req) override
+    bool Handle(const RequestClient& req) override
     {
-        if(req == Request::Request2)
+        if(req.getReq() == Request::Request2)
         {
             std::cout << "RequestHandler2 处理 OK" << std::endl;
             return true;
@@ -85,13 +94,13 @@ public:
     }
 };
 
-// 定义double类
+// RequestHandler3
 class RequestHandler3 : public AbstractHandler
 {
 public:
-    bool Handle(const Request& req) override
+    bool Handle(const RequestClient& req) override
     {
-        if(req == Request::Request3)    
+        if(req.getReq() == Request::Request3)    
         {
             std::cout << "RequestHandler3 处理 OK" << std::endl;
             return true;
