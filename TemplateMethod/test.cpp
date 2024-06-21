@@ -4,18 +4,25 @@
 */
 
 #include "Template.hpp"
+#include "t_Template.hpp"
 
-int main(){
-    
-    AbstractClass *absA = new ConcreteClassA();
-    absA->TemplateMethod();
+int main()
+{
+    // test    
+    // AbstractClass *absA = new ConcreteClassA();
+    // absA->TemplateMethod();
+    // AbstractClass *absB = new ConcreteClassB();
+    // absB->TemplateMethod();
+
+    // if(absA != nullptr) delete(absA);
+    // if(absB != nullptr) delete(absB);
 
 
-    AbstractClass *absB = new ConcreteClassB();
-    absB->TemplateMethod();
+    // test template
+    TConcreteClassA<int> c_a;   // int 没用到
+    c_a.TemplateMethod();
 
-    if(absA != nullptr) delete(absA);
-    if(absB != nullptr) delete(absB);
-
+    TConcreteClassB c_b;
+    c_b.TemplateMethod();
     return 0;
 }
