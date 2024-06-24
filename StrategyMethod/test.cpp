@@ -18,7 +18,9 @@ int main(){
     // if(c3) delete c3;
 
     // test template
-    TContext<TConcreteStrategyA<int>> *context_a = new TContext<TConcreteStrategyA<int>>(new TConcreteStrategyA<int>());
+    TContext<TConcreteStrategyA<int>>* context_a = new TContext<TConcreteStrategyA<int>>(new TConcreteStrategyA<int>());
     context_a->ContextInterface();
+    // TContext<TConcreteStrategyD>* context_d = new TContext<TConcreteStrategyD>(new TConcreteStrategyD());
+    // context_d->ContextInterface();
     if(context_a) delete context_a;
 }

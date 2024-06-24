@@ -3,6 +3,7 @@
 
 /*
  * @Description:  策略类，定义所有算法接口
+ * CRTP
  */
 template<typename Derived>
 class TStrategy
@@ -88,6 +89,26 @@ public:
     void Impl()
     {
         std::cout << "TConcreteStrategyC Algorithm." << std::endl;
+    }
+};
+
+
+// 注意普通类 目前还不支持
+class TConcreteStrategyD : public TStrategy<TConcreteStrategyD>{
+public:
+    TConcreteStrategyD()
+    {
+        std::cout << "TConcreteStrategyD Construct." << std::endl;
+    }
+
+    ~TConcreteStrategyD()
+    {
+        std::cout << "TConcreteStrategyD Deconstruct." << std::endl;
+    }
+
+    void Impl()
+    {
+        std::cout << "TConcreteStrategyD Algorithm." << std::endl;
     }
 };
 
