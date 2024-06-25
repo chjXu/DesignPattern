@@ -40,34 +40,37 @@
 
 #include <iostream>
 #include <vector>
-#include "concreteSubject.h"
-#include "concreteObserver.h"
+#include "Observer.hpp"
 
 int main(){
     // Creat Subject
     ConcreteSubject *subject = new ConcreteSubject();
 
-    // Create Observer
+    // Create 10 Observer
     std::vector<Observer*> observers;
     for(int i=0; i<10; i++){
         Observer *observer = new ConcreteObserver(subject, i);
         observers.push_back(observer);
     }
 
-    // Change the state
-    subject->setState(-1);
-
-    // Register the observer
+    // Register the observer, add observer to subject list
     for(int i=0; i<observers.size(); ++i)
         subject->attach(observers[i]);
 
+    // init the state
+    subject->setState(-1);
+    subject->notify();
+
+    // update
+    subject->setState(0);
     subject->notify();
 
     // UnRegister the observer
-    for(int i=0; i < observers.size(); ++i){
+    for(int i=0; i < observers.size(); ++i)
+    {
         subject->detach(observers[i]);
-        subject->setState(i++);
-        subject->notify();
+        // subject->setState(i++);
+        // subject->notify();
     }
 
     for(auto it : observers)

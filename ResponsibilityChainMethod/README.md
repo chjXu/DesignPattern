@@ -9,7 +9,7 @@
 
 #### 结构图:
 
-![](https://github.com/chjXu/DesignPattern/blob/main/figures/ResponsibilityChain.png)
+![](https://github.com/chjXu/DesignPattern/blob/main/figures/responsibilityChain.png)
 
 #### 总结：
 > 职责链模式的应用场合在于“一个请求可能有多个接收者，但最后真正的接收者只有一个”，这个时候请求发送者与接收者的耦合有可能出现“变化脆弱”的症状，职责链的目的就是将二者解耦，从而更好地应对变化；
