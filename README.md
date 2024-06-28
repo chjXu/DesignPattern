@@ -41,7 +41,7 @@
 
 1. 组件协作：[模板模式](https://github.com/chjXu/DesignPattern/tree/main/TemplateMethod)，[策略模式](https://github.com/chjXu/DesignPattern/tree/main/StrategyMethod)，[观察者/事件模式](https://github.com/chjXu/DesignPattern/tree/main/ObserverMethod)
 
-2. 单一职责：装饰者模式，桥模式
+2. 单一职责：[装饰者模式](https://github.com/chjXu/DesignPattern/tree/main/DecoratorMethod)，桥模式
 
 3. 对象创建：工厂模式，抽象工厂模式，建造者模式，原型模式
 
@@ -57,6 +57,10 @@
 
 9. 领域问题：解释器模式
 
+
+下面分别解释其含义：
+
+2. 在软件组件设计中，如果责任划分的不清晰，使用“继承”得到的结果往往是随着需求的变化，子类急剧膨胀，同时充斥着重复代码，这时候的关键是划清责任；
 
 ## 适用场景：
 

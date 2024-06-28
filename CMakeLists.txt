@@ -7,4 +7,6 @@ add_subdirectory(TemplateMethod)
 add_subdirectory(StrategyMethod)
 add_subdirectory(ObserverMethod)
 
+add_subdirectory(DecoratorMethod)
+
 add_subdirectory(ResponsibilityChainMethod)
