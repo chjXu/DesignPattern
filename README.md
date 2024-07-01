@@ -1,8 +1,7 @@
-# DesignPattern
+# DesignPattern（设计模式）
+> 该内容主要参考网络上 “李建忠老师” 老师的设计模式课程，并对其稍加修改；
 
-> 好的设计模式能够很好的规范代码，提高工作效率，避免bug
-
-## 目录
+#### 好的设计模式能够很好的规范代码，提高工作效率，避免bug；
 
 
 ## 设计模式8大原则：
@@ -41,7 +40,7 @@
 
 1. 组件协作：[模板模式](https://github.com/chjXu/DesignPattern/tree/main/TemplateMethod)，[策略模式](https://github.com/chjXu/DesignPattern/tree/main/StrategyMethod)，[观察者/事件模式](https://github.com/chjXu/DesignPattern/tree/main/ObserverMethod)
 
-2. 单一职责：[装饰者模式](https://github.com/chjXu/DesignPattern/tree/main/DecoratorMethod)，桥模式
+2. 单一职责：[装饰者模式](https://github.com/chjXu/DesignPattern/tree/main/DecoratorMethod)，[桥模式](https://github.com/chjXu/DesignPattern/tree/main/BridgeMethod)
 
 3. 对象创建：工厂模式，抽象工厂模式，建造者模式，原型模式
 
