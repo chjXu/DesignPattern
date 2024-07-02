@@ -10,34 +10,43 @@
 
 #include <iostream>
 #include "Bridge.hpp"
+#include "t_Bridge.hpp"
 
 using namespace std;
 
-int main(){ 
-
-    AbstractionImplement *imp = new ConcreteAbstractionImplementA(); //实现部分ConcreteAbstractionImplementA
-    Abstract *abs = new RefineAbstractA(imp); //抽象部分RefinedAbstractionA
-    abs->showName();
+int main()
+{ 
+    // test
+    // AbstractionImplement *imp = new ConcreteAbstractionImplementA();         //实现部分ConcreteAbstractionImplementA
+    // Abstract *abs = new RefineAbstractA(imp);                                //抽象部分RefinedAbstractionA
+    // abs->showName();
  
-    cout << "-----------------------------------------" << endl;
+    // cout << "-----------------------------------------" << endl;
     
-    AbstractionImplement* imp1 = new ConcreteAbstractionImplementB();        //实现部分ConcreteAbstractionImplementB
-    Abstract* abs1 = new RefineAbstractA(imp1);                        //抽象部分RefinedAbstractionA
-    abs1->showName();
+    // AbstractionImplement* imp1 = new ConcreteAbstractionImplementB();        //实现部分ConcreteAbstractionImplementB
+    // Abstract* abs1 = new RefineAbstractA(imp1);                              //抽象部分RefinedAbstractionA
+    // abs1->showName();
 
-    cout << "-----------------------------------------" << endl;
+    // cout << "-----------------------------------------" << endl;
  
-    AbstractionImplement* imp2 = new ConcreteAbstractionImplementA();        //实现部分ConcreteAbstractionImplementA     
-    Abstract* abs2 = new RefineAbstractB(imp2);                        //抽象部分RefinedAbstractionB
-    abs2->showName();
+    // AbstractionImplement* imp2 = new ConcreteAbstractionImplementA();        //实现部分ConcreteAbstractionImplementA     
+    // Abstract* abs2 = new RefineAbstractB(imp2);                              //抽象部分RefinedAbstractionB
+    // abs2->showName();
 
-    cout << "-----------------------------------------" << endl;
+    // cout << "-----------------------------------------" << endl;
  
-    AbstractionImplement* imp3 = new ConcreteAbstractionImplementB();        //实现部分ConcreteAbstractionImplementB
-    Abstract* abs3 = new RefineAbstractB(imp3);                        //抽象部分RefinedAbstractionB
-    abs3->showName();
-     
-    
-    cout << endl;
+    // AbstractionImplement* imp3 = new ConcreteAbstractionImplementB();        //实现部分ConcreteAbstractionImplementB
+    // Abstract* abs3 = new RefineAbstractB(imp3);                              //抽象部分RefinedAbstractionB
+    // abs3->showName();
+    // cout << endl;
+
+
+    // test template
+    TConcreteAbstractionImplement<int>* concreteImp = new TConcreteAbstractionImplement<int>();
+    TRefineAbstract<TAbstract, TConcreteAbstractionImplement<int>> abs(concreteImp);
+    abs.showName();
+
+    delete concreteImp;
+
     return 0;
 }
