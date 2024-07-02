@@ -8,5 +8,6 @@ add_subdirectory(StrategyMethod)
 add_subdirectory(ObserverMethod)
 
 add_subdirectory(DecoratorMethod)
+add_subdirectory(BridgeMethod)
 
 add_subdirectory(ResponsibilityChainMethod)
