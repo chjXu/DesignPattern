@@ -10,4 +10,6 @@ add_subdirectory(ObserverMethod)
 add_subdirectory(DecoratorMethod)
 add_subdirectory(BridgeMethod)
 
+add_subdirectory(FactoryMethod)
+
 add_subdirectory(ResponsibilityChainMethod)
