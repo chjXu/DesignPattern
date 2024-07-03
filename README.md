@@ -42,7 +42,7 @@
 
 2. 单一职责：[装饰者模式](https://github.com/chjXu/DesignPattern/tree/main/DecoratorMethod)，[桥模式](https://github.com/chjXu/DesignPattern/tree/main/BridgeMethod)
 
-3. 对象创建：[工厂模式](https://github.com/chjXu/DesignPattern/tree/main/FactoryrMethod)，抽象工厂模式，建造者模式，原型模式
+3. 对象创建：[工厂模式](https://github.com/chjXu/DesignPattern/tree/main/FactoryMethod)，抽象工厂模式，建造者模式，原型模式
 
 4. 对象性能：单一模式，享元模式
 
