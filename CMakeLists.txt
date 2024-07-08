@@ -11,5 +11,6 @@ add_subdirectory(DecoratorMethod)
 add_subdirectory(BridgeMethod)
 
 add_subdirectory(FactoryMethod)
+add_subdirectory(AbstractFactoryMethod)
 
 add_subdirectory(ResponsibilityChainMethod)
