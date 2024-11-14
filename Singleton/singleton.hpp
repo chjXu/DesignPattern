@@ -1,7 +1,33 @@
-#include "singleton.h"
+#pragma once
+
+#include <iostream>
+#include <atomic>
+#include <mutex>
 #include <thread>
 
-Singleton* Singleton::m_instance = nullptr;
+class Singleton{
+public:
+    static Singleton* getInstance();
+
+    void setID(const int id) { this->id = id; }
+    int getID() const { return id; }
+
+private:
+    int id;
+
+private:
+    Singleton();
+    Singleton(const Singleton& other) = delete;
+
+    // static Singleton* m_instance;
+    static std::atomic<Singleton*> m_instance;
+    static std::mutex m_mutex;
+};
+
+Singleton::Singleton() {}
+
+
+// Singleton* Singleton::m_instance = nullptr;
 
 /** 线程非安全版本
  * 在多线程情况下，对象创建可能会造成资源抢占
@@ -43,11 +69,11 @@ Singleton* Singleton::m_instance = nullptr;
 /**
  * C++ 11版本之后实现（volatile）
 */
-
-std::atomic<Singleton*> Singleton::m_instance; // 原子对象
+std::atomic<Singleton*> Singleton::m_instance{nullptr}; // 原子对象
 std::mutex Singleton::m_mutex;
 
-Singleton* Singleton::getInstance(){
+Singleton* Singleton::getInstance()
+{
     Singleton* tmp = m_instance.load(std::memory_order_relaxed);
     std::atomic_thread_fence(std::memory_order_acquire); // 获取fence
     if(tmp == nullptr){

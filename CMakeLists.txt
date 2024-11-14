@@ -14,3 +14,5 @@ add_subdirectory(FactoryMethod)
 add_subdirectory(AbstractFactoryMethod)
 
 add_subdirectory(ResponsibilityChainMethod)
+
+add_subdirectory(Singleton)
