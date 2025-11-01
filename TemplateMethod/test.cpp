@@ -9,20 +9,20 @@
 int main()
 {
     // test    
-    // AbstractClass *absA = new ConcreteClassA();
-    // absA->TemplateMethod();
-    // AbstractClass *absB = new ConcreteClassB();
-    // absB->TemplateMethod();
+    AbstractClass *absA = new ConcreteClassA();
+    absA->TemplateMethod();
+    AbstractClass *absB = new ConcreteClassB();
+    absB->TemplateMethod();
 
-    // if(absA != nullptr) delete(absA);
-    // if(absB != nullptr) delete(absB);
+    if(absA != nullptr) delete(absA);
+    if(absB != nullptr) delete(absB);
 
 
     // test template
-    TConcreteClassA<int> c_a;   // int 没用到
-    c_a.TemplateMethod();
+    // TConcreteClassA<int> c_a;   // int 没用到
+    // c_a.TemplateMethod();
 
-    TConcreteClassB c_b;
-    c_b.TemplateMethod();
+    // TConcreteClassB c_b;
+    // c_b.TemplateMethod();
     return 0;
 }

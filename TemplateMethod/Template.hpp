@@ -9,56 +9,32 @@
 class AbstractClass
 {
 public:
-    AbstractClass() 
-    {
-        std::cout << "AbstractClass Construct ..." << std::endl;
-    }
-    virtual ~AbstractClass() 
-    {
-        std::cout << "AbstractClass DeConstruct ..." << std::endl;
-    }
+    AbstractClass() = default;
+    virtual ~AbstractClass() = default;
 
-    /**
-     * @description: 公共方法，每一个继承的类都调用该方法，并实现其中间过程。
-     * @param {*}
-     * @return {*}
-     */    
-    void TemplateMethod()
+    AbstractClass(const AbstractClass&) = delete;
+    AbstractClass& operator=(const AbstractClass&) = delete;
+
+    // 模板方法：算法骨架，不允许子类修改
+    virtual void TemplateMethod() final
     {
-        if(Step1())
-        {
-            Step2();
-        }
-
-        if(Step3())
-        {
-            Step4();
-        }
+        if(Step1()) Step2();
+        if(Step3()) Step4();
     }
-
 protected:
-    /**
-     * @description: 过程2，在子类中实现。
-     * @param {*}
-     * @return {*}
-     */    
-    virtual void Step2() = 0;
-
-    /**
-     * @description: 过程4，在子类中实现。
-     * @param {*}
-     * @return {*}
-     */    
-    virtual void Step4() = 0;
-
-private:
+    // 过程1，可以有默认实现，允许子类覆盖
     virtual bool Step1()
     {
         std::cout << "AbstractClass Step1 ..." << std::endl;
         return true;
     }
+    // 过程2，在子类中实现。
+    virtual void Step2() = 0;
 
-    // 稳定的代码不要写成虚函数，即不能 override
+    // 过程4，在子类中实现。
+    virtual void Step4() = 0;
+private:
+    // 过程3，默认实现，不允许子类覆盖
     bool Step3()
     {
         std::cout << "AbstractClass Step3 ..." << std::endl;
@@ -69,54 +45,32 @@ private:
 
 class ConcreteClassA : public AbstractClass{
 public:
-    ConcreteClassA() 
-    {
-        std::cout << "ConcreteClassA Construct ..." << std::endl;
-    }
+    ConcreteClassA() = default;
+    ~ConcreteClassA() override = default;
 
 protected:
-    ~ConcreteClassA() 
-    {
-        std::cout << "ConcreteClassA DeConstruct ..." << std::endl;
-    }
-
     virtual void Step2() override
     {
         std::cout << "ConcreteClassA Step2 ..." << std::endl;
     }
-
-    // 禁止 override
-    // virtual void Step3() override
-    // {
-    //     std::cout << "ConcreteClassA Step3 ..." << std::endl;
-    // }
-
     virtual void Step4() override
     {
         std::cout << "ConcreteClassA Step4 ..." << std::endl;
     }
-
 private:
 };
 
 
 class ConcreteClassB : public AbstractClass{
 public:
-    ConcreteClassB() 
-    {
-        std::cout << "ConcreteClassB Construct ..." << std::endl;
-    }
+    ConcreteClassB() = default;
+    ~ConcreteClassB() override = default;
 
 protected:
-    ~ConcreteClassB() 
-    {
-        std::cout << "ConcreteClassB DeConstruct ..." << std::endl;
-    }
-
     virtual bool Step1() override
     {
         std::cout << "ConcreteClassB Step1 ..." << std::endl;
-        return false;
+        return true;
     }
 
     virtual void Step2() override
