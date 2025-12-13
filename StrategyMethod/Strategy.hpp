@@ -1,9 +1,8 @@
 #pragma once
 #include <iostream>
+#include <memory>
 
-/*
- * @Description:  策略类，定义所有算法接口
- */
+//  抽象策略类：定义所有支持的算法的公共接口
 class Strategy
 {
 public:
@@ -17,15 +16,8 @@ public:
         std::cout << "Strategy Deconstruct." << std::endl;
     }
 
-    /**
-     * @description: 算法接口，每一个继承的类都调用该方法，并实现其中间过程。
-     * @param {*}
-     * @return {*}
-     */    
-    virtual void algorithmInterface()
-    {
-        std::cout << "Strategy algorithm." << std::endl;
-    }
+    // 算法接口: 由具体策略类实现 
+    virtual void algorithmInterface() = 0;
 };
 
 /**
@@ -37,16 +29,14 @@ public:
     {
         std::cout << "ConcreteStrategyA Construct." << std::endl;
     }
-
     ~ConcreteStrategyA()
     {
         std::cout << "ConcreteStrategyA Deconstruct." << std::endl;
     }
-
 protected:
     virtual void algorithmInterface() override
     {
-        std::cout << "ConcreteStrategyA Algorithm." << std::endl;
+        std::cout << "Run concreteStrategyA Algorithm." << std::endl;
     }
 };
 
@@ -57,16 +47,14 @@ public:
     {
         std::cout << "ConcreteStrategyB Construct." << std::endl;
     }
-
     ~ConcreteStrategyB()
     {
         std::cout << "ConcreteStrategyB Deconstruct." << std::endl;
     }
-
 protected:
     virtual void algorithmInterface() override
     {
-        std::cout << "ConcreteStrategyB Algorithm." << std::endl;
+        std::cout << "Run concreteStrategyB Algorithm." << std::endl;
     }
 };
 
@@ -77,12 +65,10 @@ public:
     {
         std::cout << "ConcreteStrategyC Construct." << std::endl;
     }
-
     ~ConcreteStrategyC()
     {
         std::cout << "ConcreteStrategyC Deconstruct." << std::endl;
     }
-
 protected:
     virtual void algorithmInterface() override
     {
@@ -96,20 +82,30 @@ protected:
  */
 class Context{
 public:
-    Strategy *strategy;
-    Context(Strategy *strategy) : strategy(strategy) {}
+    explicit Context(std::unique_ptr<Strategy> strategy) 
+    : strategy_(std::move(strategy)) {}
 
-    ~Context()
-    {
-        if(this->strategy)
-        {
-            delete this->strategy;
-            this->strategy = nullptr;
-        }
-    }
+    // 禁止拷贝，允许移动
+    Context(const Context&) = delete;
+    Context& operator=(const Context&) = delete;
+    Context(Context&&) noexcept = default;
+    Context& operator=(Context&&) noexcept = default;
+    ~Context() = default;
 
     void ContextInterface()
     {
-        this->strategy->algorithmInterface();
+        if (strategy_)
+            this->strategy_->algorithmInterface();
     }
+
+    // 运行时替换策略（传入 unique_ptr，旧策略会被销毁）
+    void setStrategy(std::unique_ptr<Strategy> strategy)
+    {
+        strategy_ = std::move(strategy);
+    }
+
+    // 获取当前策略
+    Strategy* getStrategy() const { return strategy_.get(); }
+private:
+    std::unique_ptr<Strategy> strategy_;
 };

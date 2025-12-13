@@ -1,82 +1,97 @@
-/*
- * @Description:  观察者模式
- * @Author: chengjun_xu
- * @Data: Do not edit
- * @LastAuthor: Do not edit
- * @LastEditTime: 2022-01-07 15:57:13
- */
-
-
-/**
- * 目的：定义一种一对多的关系，让多个观察者对象同时监听某一个主题对象。
- *      这个主题对象在状态发生时，通知所有观察者对象，使他们能够自动更新自己。
- * 
- * 应该场景：
- * 
- * 存在问题：
-
- * 1、一旦某个业务逻辑发生改变，如购票业务中增加其他业务逻辑，需要修改购票核心文件、甚至购票流程。
-
- * 2、日积月累后，文件冗长，导致后续维护困难。
-
- *
-
- * 存在问题原因主要是程序的"紧密耦合"，使用观察模式将目前的业务逻辑优化成"松耦合"，达到易维护、易修改的目的，
-
- * 同时也符合面向接口编程的思想。
-
- *
-
- * 观察者模式典型实现方式：
-
- * 1、定义2个接口：观察者（通知）接口、被观察者（主题）接口
-
- * 2、定义2个类，观察者对象实现观察者接口、主题类实现被观者接口
-
- * 3、主题类注册自己需要通知的观察者
-
- * 4、主题类某个业务逻辑发生时通知观察者对象，每个观察者执行自己的业务逻辑。
-*/
-
 #include <iostream>
 #include <vector>
+#include <memory>
+#include <string>
 #include "Observer.hpp"
 
-int main(){
-    // Creat Subject
-    ConcreteSubject *subject = new ConcreteSubject();
+// 假设现在有一个老板（subject），手底下带有多个员工（observers）。
+// 当老板的状态发生变化时，所有的员工都会收到通知并做出相应的反应。
+int main() {
+    // 创建老板（ConcreteSubject）
+    auto boss = std::make_shared<ConcreteSubject>();
 
-    // Create 10 Observer
-    std::vector<Observer*> observers;
-    for(int i=0; i<10; i++){
-        Observer *observer = new ConcreteObserver(subject, i);
-        observers.push_back(observer);
+    // 创建员工（ConcreteObservers）并分配(注册)到老板
+    std::vector<std::shared_ptr<Observer>> staffes;
+    for (int i = 0; i < 10; ++i) {
+        auto staff = std::make_shared<ConcreteObserver>(i); // i 作为员工 ID
+        staffes.push_back(staff);
+        boss->attach(staff);
     }
 
-    // Register the observer, add observer to subject list
-    for(int i=0; i<observers.size(); ++i)
-        subject->attach(observers[i]);
+    // 老板说要对所有员工加工资
+    boss->setState(std::string("All staff add money bonus."));
+    // 通知所有员工
+    boss->notify();
 
-    // init the state
-    subject->setState(-1);
-    subject->notify();
+    std::cout << "---------------------------------" << std::endl;
 
-    // update
-    subject->setState(0);
-    subject->notify();
+    // 现在要对部分员工再次加工资，对10名员工的前5名员工进行加薪
+    for (int i = 5; i < 10; ++i) {
+        boss->detach(staffes[i]);
+    }
+    boss->setState(std::string("you add money bonus again."));
+    // 通知剩余员工
+    boss->notify();
 
-    // UnRegister the observer
-    for(int i=0; i < observers.size(); ++i)
-    {
-        subject->detach(observers[i]);
-        // subject->setState(i++);
-        // subject->notify();
+    // 对上面注销过的员工，再次添加进来
+    for (int i = 5; i < 10; ++i) {
+        boss->attach(staffes[i]);
     }
 
-    for(auto it : observers)
-        delete it;
-        
-    delete subject;
+    std::cout << "---------------------------------" << std::endl;
+    // 后面2名不满意，屏蔽老板的通知
+    for (int i = staffes.size() - 2; i < staffes.size(); ++i) {
+        staffes[i].reset(); // 销毁后2名员工对象，变成过期观察者
+    }
+    boss->setState(std::string("meeting at 3 PM."));
+    boss->notify();
 
+    std::cout << "---------------------------------" << std::endl;
+
+    // 老板发现了，开除他们，并对其他人发出通知
+    boss->setState(std::string("staff of id 8 and id 9 quit job."));
+    boss->notify();
+
+    std::cout << "---------------------------------" << std::endl;
+
+    // 现在又有1名新员工加入，工号为10086
+    auto newStaff = std::make_shared<ConcreteObserver>(10086);
+    boss->attach(newStaff);
+    boss->setState(std::string("new staff 10086 join the company."));
+    boss->notify();
+
+    std::cout << "---------------------------------" << std::endl;
+
+    // 现在又有一位新boss加入，并把前5名员工和新员工分给新老板
+    // 老的老板就剩4位员工了
+    auto newBoss =  std::make_shared<ConcreteSubject>();
+    for (int i = 0; i < 5; ++i) {
+        boss->detach(staffes[i]);
+        newBoss->attach(staffes[i]);
+    }
+    boss->detach(newStaff);
+    newBoss->attach(newStaff);
+    newBoss->setState(std::string("your boss is change."));
+    newBoss->notify();  
+
+    std::cout << "---------------------------------" << std::endl;
+
+    boss->setState(std::string("we only have 3 staff."));
+    boss->notify();
+
+    std::cout << "---------------------------------" << std::endl;
+    // 最大的老板掀桌子，解雇所有员工，boss和新boss都不知道
+    for (int i = 0; i < staffes.size(); ++i) {
+        staffes[i].reset();
+    }
+    newStaff.reset();
+    
+    // 没有员工了，boss和新boss还不知情，输出为空
+    boss->setState(std::string("all staff are fired."));
+    boss->notify();  
+    newBoss->setState(std::string("all staff are fired."));
+    newBoss->notify();
+    std::cout << "---------------------------------" << std::endl;
+    std::cout << "system: 没人了，通知个球" << std::endl;
     return 0;
 }
