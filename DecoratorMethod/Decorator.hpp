@@ -5,65 +5,51 @@ class Stream
 {
 public:
     virtual ~Stream() {}
-    virtual char Read(int number) = 0;
-    virtual void Seek(int position) = 0;
+    virtual std::string Read(int number) = 0;   // 将输入数字转为字符串
+    virtual char Seek(const std::string& num, int position) = 0;        // 查询字符串中的字符
     virtual void Write(char data) = 0;
 };
 
-
+// 文件系统的读写和查询功能
 class FileStream : public Stream
 {
 public:
-    virtual char Read(int number)
+    virtual std::string Read(int number)
     {
         std::cout << "FileStream Read..." << std::endl;
-        return '0';
+        return std::to_string(number);
     }
-    virtual void Seek(int position)
+    virtual char Seek(const std::string& num, int position)
     {
+        if (num.empty() || position >= num.size()) return ' ';
         std::cout << "FileStream Seek..." << std::endl;
+        return num[position];
     }
     virtual void Write(char data)
     {
         std::cout << "FileStream Write..." << std::endl;
+        return;
     }
 };
 
-
+// 网络系统的读写和查询功能
 class NetworkStream : public Stream
 {
 public:
-    virtual char Read(int number)
+    virtual std::string Read(int number)
     {
         std::cout << "NetworkStream Read..." << std::endl;
-        return '0';
+        return std::to_string(number);
     }
-    virtual void Seek(int position)
+    virtual char Seek(const std::string& num, int position)
     {
+        if (num.empty() || position >= num.size()) return ' ';
         std::cout << "NetworkStream Seek..." << std::endl;
+        return num[position];
     }
     virtual void Write(char data)
     {
         std::cout << "NetworkStream Write..." << std::endl;
-    }
-};
-
-
-class MemoryStream : public Stream
-{
-public:
-    virtual char Read(int number)
-    {
-        std::cout << "MemoryStream Read..." << std::endl;
-        return '0';
-    }
-    virtual void Seek(int position)
-    {
-        std::cout << "MemoryStream Seek..." << std::endl;
-    }
-    virtual void Write(char data)
-    {
-        std::cout << "MemoryStream Write..." << std::endl;
     }
 };
 
@@ -79,7 +65,7 @@ public:
     Stream* stream;
 };
 
-// 扩展操作
+// 扩展操作（加密操作）
 class CryptStream : public DecoratorStream
 {
 public:
@@ -88,28 +74,26 @@ public:
         std::cout << "CryptStream construct" << std::endl;
     }
 
-    virtual char Read(int number)
+    virtual std::string Read(int number)
     {
         std::cout << "CryptStream Read..." << std::endl;
         // 额外的加密操作...
-        stream->Read(number);
-        // 额外的加密操作...
-        return '0';
+        int new_num = encryption(number);
+        return stream->Read(new_num);
     }
-    virtual void Seek(int position)
+    virtual char Seek(const std::string& num, int position)
     {
         std::cout << "CryptStream Seek..." << std::endl;
         // 额外的加密操作...
-        stream->Seek(position);
-        // 额外的加密操作...
+        int new_pos = encryption(position);
+        return stream->Seek(num, new_pos);
     }
-    virtual void Write(char data)
+
+    virtual void Write(char data) override {}
+
+private:
+    int encryption(int num)
     {
-        std::cout << "CryptStream Write..." << std::endl;
-        // 额外的加密操作...
-        stream->Write(data);
-        // 额外的加密操作...
+        return 2 * num;
     }
 };
-
-// 其它扩展操作
