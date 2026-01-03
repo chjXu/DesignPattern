@@ -42,11 +42,20 @@ int main()
 
 
     // test template
-    TConcreteAbstractionImplement<int>* concreteImp = new TConcreteAbstractionImplement<int>();
-    TRefineAbstract<TAbstract, TConcreteAbstractionImplement<int>> abs(concreteImp);
-    abs.showName();
+    // TConcreteAbstractionImplement<int>* concreteImp = new TConcreteAbstractionImplement<int>();
+    // TRefineAbstract<TAbstract, TConcreteAbstractionImplement<int>> abs(concreteImp);
+    // abs.showName();
 
-    delete concreteImp;
+    // delete concreteImp;
+
+    std::unique_ptr<Abstract> abs = std::make_unique<Abstract>(std::make_unique<ConcreteImpA>());
+    abs->feature1();
+    abs->feature2();
+
+    std::cout << "------------------------" << std::endl;
+    std::unique_ptr<RefineAbstract> refined = std::make_unique<RefineAbstract>(std::make_unique<ConcreteImpB>());
+    refined->feature1();
+    refined->featureN();
 
     return 0;
 }
