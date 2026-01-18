@@ -1,173 +1,61 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 
-// 抽象基类，
-class ISplitter
+// Product 抽象类
+class Product
 {
-private:
-    /* data */
 public:
-    ISplitter()
-    {
-        std::cout << "ISplitter Construct..." << std::endl;
-    }
-
-    virtual ~ISplitter()
-    {
-        std::cout << "ISplitter Deconstruct..." << std::endl;
-    }
-
-    virtual void split() = 0; // 抽象方法
+    virtual ~Product() = default;
+    virtual void doStuff() = 0;  
 };
 
-
-class SplitterFactory
+// 具体Product类
+class ConcreteProductA : public Product
 {
-private:
-    /* data */
 public:
-    SplitterFactory(/* args */)
-    {
-        std::cout << "SplitterFactory Construct..." << std::endl;
+    void doStuff() override{
+        std::cout << "ConcreteProdictA doing stuff..." << std::endl;
     }
-
-    virtual ~SplitterFactory()
-    {
-        std::cout << "SplitterFactory Deconstruct..." << std::endl;
-    }
-
-    virtual ISplitter *createSplitter() = 0;
 };
-
-
-class BinarySplitter : public ISplitter
+class ConcreteProductB : public Product
 {
-private:
-    /* data */
 public:
-    BinarySplitter(/* args */)
-    {
-        std::cout << "BinarySplitter Construct..." << std::endl;
-    }
-
-    ~BinarySplitter()
-    {
-        std::cout << "BinarySplitter Deconstruct..." << std::endl;
-    }
-
-    virtual void split()
-    {
-        std::cout << "BinarySplitter is working..." << std::endl;
+    void doStuff() override{
+        std::cout << "ConcreteProdictB doing stuff..." << std::endl;
     }
 };
 
-
-class BinarySplitterFactory : public SplitterFactory
+// Creator 抽象类
+class Creator
 {
-private:
-    /* data */
 public:
-    BinarySplitterFactory(/* args */)
+    virtual ~Creator() = default;
+    virtual std::unique_ptr<Product> createProduct() = 0; // 工厂方法
+    void someOperation()
     {
-        std::cout << "BinarySplitterFactory Construct..." << std::endl;
-    }
-
-    ~BinarySplitterFactory()
-    {
-        std::cout << "BinarySplitterFactory Deconstruct..." << std::endl;
-    }
-
-    virtual ISplitter* createSplitter()
-    {
-        return new BinarySplitter();
+        auto product = createProduct();
+        product->doStuff();
     }
 };
 
-
-class PictureSplitter : public ISplitter
+// 具体Creator类
+class ConcreteCreatorA : public Creator
 {
-private:
-    /* data */
 public:
-    PictureSplitter(/* args */)
+    std::unique_ptr<Product> createProduct() override
     {
-        std::cout << "PictureSplitter Construct..." << std::endl;
-    }
-
-    ~PictureSplitter()
-    {
-        std::cout << "PictureSplitter Deconstruct..." << std::endl;
-    }
-
-    virtual void split()
-    {
-        std::cout << "PictureSplitter is working..." << std::endl;
+        std::cout << "Create ProductA..." << std::endl;
+        return std::make_unique<ConcreteProductA>();
     }
 };
-
-
-class PictureSplitterFactory : public SplitterFactory
+class ConcreteCreatorB : public Creator
 {
-private:
-    /* data */
 public:
-    PictureSplitterFactory(/* args */)
+    std::unique_ptr<Product> createProduct() override
     {
-        std::cout << "PictureSplitterFactory Construct..." << std::endl;
-    }
-
-    ~PictureSplitterFactory()
-    {
-        std::cout << "PictureSplitterFactory Deconstruct..." << std::endl;
-    }
-
-    virtual ISplitter* createSplitter()
-    {
-        return new PictureSplitter();
-    }
-};
-
-
-class TxtSplitter : public ISplitter
-{
-private:
-    /* data */
-public:
-    TxtSplitter(/* args */)
-    {
-        std::cout << "TxtSplitter Construct..." << std::endl;
-    }
-
-    ~TxtSplitter()
-    {
-        std::cout << "TxtSplitter Deconstruct..." << std::endl;
-    }
-
-    virtual void split()
-    {
-        std::cout << "TxtSplitter is working..." << std::endl;
-    }
-};
-
-
-class TxtSplitterFactory : public SplitterFactory
-{
-private:
-    /* data */
-public:
-    TxtSplitterFactory(/* args */)
-    {
-        std::cout << "TxtSplitterFactory Construct..." << std::endl;
-    }
-
-    ~TxtSplitterFactory()
-    {
-        std::cout << "TxtSplitterFactory Deconstruct..." << std::endl;
-    }
-
-    virtual ISplitter* createSplitter()
-    {
-        return new TxtSplitter();
+        std::cout << "Create ProductB..." << std::endl;
+        return std::make_unique<ConcreteProductB>();
     }
 };

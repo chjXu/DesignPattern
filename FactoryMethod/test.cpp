@@ -5,18 +5,12 @@
 
 int main()
 {
-    // SplitterFactory* factory = new BinarySplitterFactory();
-    // ISplitter* splitter = factory->createSplitter(); // 多态new
-    // splitter->split();
-    // delete splitter;
-    // delete factory;
+    std::unique_ptr<Creator> creator;
+    creator = std::make_unique<ConcreteCreatorA>();
+    creator->someOperation();
 
-    // test template
-    TSplitterFactory* factory = new TSplitterModuleFactory<std::string>("Binary");
-    TISplitter* splitter = factory->createSplitter();
-    splitter->split();
-    delete splitter;
-    delete factory;
+    creator = std::make_unique<ConcreteCreatorB>();
+    creator->someOperation();
 
     return 0;
 }
