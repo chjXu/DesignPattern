@@ -6,20 +6,18 @@
 
 int main()
 {
-    AbstractFactory* dbFactory = new SQLFactory();
-    IDBConnection* connection = dbFactory->createConnection();
-    connection->doConnection();
+    std::unique_ptr<AbstractFactory> factory =
+        std::make_unique<ConcreteFactory1>();
 
-    IDBCommand* command = dbFactory->createCommand();
-    command->doCommand();
-    command->setConnection(*connection); // 关联性
+    auto productA = factory->createProductA();  // F1 A
+    auto productB = factory->createProductB();  // F1 B
+    productA->use();
+    productB->use();
 
-    IDBDatareader* datareader = dbFactory->createDatareder();
-    datareader->doDatareader();
-
-    delete datareader;
-    delete command;
-    delete connection;
-    delete dbFactory;
-    return 0;
+    // 切换到另一个具体工厂
+    factory = std::make_unique<ConcreteFactory2>();
+    productA = factory->createProductA();  // F2 A
+    productB = factory->createProductB();  // F2 B
+    productA->use();
+    productB->use();
 }
