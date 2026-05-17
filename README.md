@@ -41,7 +41,7 @@
 
 2. 单一职责：[装饰者模式](https://github.com/chjXu/DesignPattern/tree/main/DecoratorMethod)，[桥模式](https://github.com/chjXu/DesignPattern/tree/main/BridgeMethod)
 
-3. 对象创建：[工厂模式](https://github.com/chjXu/DesignPattern/tree/main/FactoryMethod)，[抽象工厂模式](https://github.com/chjXu/DesignPattern/tree/main/AbstractFactoryMethod)，建造者模式，原型模式
+3. 对象创建：[工厂模式](https://github.com/chjXu/DesignPattern/tree/main/FactoryMethod)，[抽象工厂模式](https://github.com/chjXu/DesignPattern/tree/main/AbstractFactoryMethod)，[建造者模式](https://github.com/chjXu/DesignPattern/tree/main/BuildMethod)，原型模式
 
 4. 对象性能：单一模式，享元模式
 
@@ -65,24 +65,6 @@
 3. 对象创建：
 
 ## 适用场景：
-
-
-#### 3. 建造者模式
-
-定义：
-> 将一个复杂对象的构建与其表示相分离，使用同样的构建过程（稳定）可以创建不同的表示（变化）
-
-动机：
-> 有时候面临着“一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象的各个部分经常面临剧烈的变化，但是将它们组合在一起的算法却相对稳定；
-
-> 保持系统中的“稳定构建算法”不随着需求改变而改变；
-
-总结：
-> 主要用于“分步构建一个复杂的对象”。其中，”分步“是一个稳定算法，而复杂对象的各个部分则经常变化
-
-> 应对”复杂对象各个部分“的频繁需求变动。缺点在于难以应对”分步构建算法“的需求变动
-
-> 注意不同语言构造器中调用虚函数的差别（C++ vs C#、Java）
 
 
 #### 4. 原型模式
