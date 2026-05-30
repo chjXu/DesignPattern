@@ -41,7 +41,7 @@
 
 2. 单一职责：[装饰者模式](https://github.com/chjXu/DesignPattern/tree/main/DecoratorMethod)，[桥模式](https://github.com/chjXu/DesignPattern/tree/main/BridgeMethod)
 
-3. 对象创建：[工厂模式](https://github.com/chjXu/DesignPattern/tree/main/FactoryMethod)，[抽象工厂模式](https://github.com/chjXu/DesignPattern/tree/main/AbstractFactoryMethod)，[建造者模式](https://github.com/chjXu/DesignPattern/tree/main/BuildMethod)，原型模式
+3. 对象创建：[工厂模式](https://github.com/chjXu/DesignPattern/tree/main/FactoryMethod)，[抽象工厂模式](https://github.com/chjXu/DesignPattern/tree/main/AbstractFactoryMethod)，[建造者模式](https://github.com/chjXu/DesignPattern/tree/main/BuildMethod)，[原型模式](https://github.com/chjXu/DesignPattern/tree/main/PrototypeMethod)
 
 4. 对象性能：单一模式，享元模式
 
@@ -66,23 +66,6 @@
 
 ## 适用场景：
 
-
-#### 4. 原型模式
-
-定义：
-> 使用原型实例指定创建对象的种类，然后通过拷贝这些原型来创建新的对象
-
-动机：
-> 在软件系统中，经常面临“某些结构复杂的对象”的创建工作；由于需求的变化，这些对象经常面临剧烈的变化，但是它们却拥有比较稳定一致接口；
-
-> 如何向“客户程序”隔离出“这些易变对象”，从而使“依赖这些易变对象的客户程序”不随着需求改变而改变；
-
-总结：
-> 原型模式同样适用于隔离类对象的使用者和具体类型（易变类）之间的耦合关系，它同样要求这些“易变类”拥有稳定的接口；
-
-> 原型模式对于“如何创建易变类的实例对象”采用“原型克隆”的方法来做，它使得我们可以非常灵活的动态创建“拥有某些稳定接口”的新对象----所需工作仅仅是注册一个新类的对象（原型），然后在任何有需要的地方Clone;
-
-> 原型模式中的Clone方法可以利用某些框架中的序列化来实现深拷贝；
 
 
 #### 5.单一模式 

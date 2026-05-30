@@ -13,6 +13,7 @@ add_subdirectory(BridgeMethod)
 add_subdirectory(FactoryMethod)
 add_subdirectory(AbstractFactoryMethod)
 add_subdirectory(BuilderMethod)
+add_subdirectory(PrototypeMethod)
 
 add_subdirectory(ResponsibilityChainMethod)
 
