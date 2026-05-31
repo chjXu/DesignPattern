@@ -1,11 +1,31 @@
+#include <iostream>
+#include <thread>
+#include <vector>
+
 #include "singleton.hpp"
+
+void worker(int id)
+{
+    Singleton& instance = Singleton::getInstance();
+
+    std::cout << "Thread " << id << " Instance Address: " << &instance << std::endl;
+}
 
 int main()
 {
-    Singleton* s_instance = Singleton::getInstance();
-    s_instance->setID(100);
-    std::cout << s_instance->getID() << std::endl;
+    // 所有线程打印的地址应该完全相同：
+    // 说明只创建了一个对象。
+    std::vector<std::thread> threads;
 
-    delete s_instance;
+    for (int i = 0; i < 5; ++i)
+    {
+        threads.emplace_back(worker, i);
+    }
+
+    for (auto& t : threads)
+    {
+        t.join();
+    }
+
     return 0;
 }
