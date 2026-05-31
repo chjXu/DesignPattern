@@ -43,7 +43,7 @@
 
 3. 对象创建：[工厂模式](https://github.com/chjXu/DesignPattern/tree/main/FactoryMethod)，[抽象工厂模式](https://github.com/chjXu/DesignPattern/tree/main/AbstractFactoryMethod)，[建造者模式](https://github.com/chjXu/DesignPattern/tree/main/BuildMethod)，[原型模式](https://github.com/chjXu/DesignPattern/tree/main/PrototypeMethod)
 
-4. 对象性能：单一模式，享元模式
+4. 对象性能：[单例模式]((https://github.com/chjXu/DesignPattern/tree/main/SingletonMethod))，享元模式
 
 5. 接口隔离：门面模式，代理模式，中介模式，适配器模式
 
@@ -66,26 +66,6 @@
 
 ## 适用场景：
 
-
-
-#### 5.单一模式 
-定义：
-> 保证一个类仅有一个实例，并提供一个该实例的全局访问点
-
-动机：
-
-> 在构建对象，经常有这样一些特殊的类，必须保证它们在系统中只存在一个实例，才能保证它们的逻辑正确性、以及良好的效率。
-
-> 如何绕过常规的构造器，提供一种机制来保证一个类只有一个实例？
-
-> 这应该是类设计者的责任，而不是使用者的责任
-
-总结：
-> 单例模式中的实例构造器可以设置为protected以允许子类派生
-
-> 单例模式一般不要支持靠内构造函数和clone接口，因为这有可能导致多个对象实例，与单例模式的初衷违背
-
-> 如何实现多线程环境下的安全单例模式？注意对双检查锁的正确实现
 
 #### 6.享元模式
 定义：
